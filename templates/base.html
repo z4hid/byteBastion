@@ -1,0 +1,205 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Byte Bastion - Enterprise-grade cybersecurity solutions for personal and business use. Protect against malware, viruses, and data breaches.">
+    <meta name="keywords" content="cybersecurity, antivirus, malware detection, data breach check, security software">
+    <title>Byte Bastion - Advanced Cybersecurity Solutions | Protect Your Digital Life</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <style>
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-slate-900 min-h-screen">
+        <header class="absolute inset-x-0 top-0 z-50">
+            <!-- Mobile Menu Panel -->
+            <div id="mobileMenu" class="mobile-menu fixed inset-y-0 left-0 w-64 bg-slate-900 shadow-lg border-r border-cyan-500/10 z-50">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="flex items-center gap-2">
+                            <div class="bg-gradient-to-r from-cyan-500 to-blue-500 p-2 rounded-lg shadow-lg shadow-cyan-500/20">
+                                <i class="fas fa-shield-alt text-white text-xl"></i>
+                            </div>
+                            <span class="text-xl font-bold text-white"> <a href="{% url 'home' %}">Byte Bastion</a></span>
+                        </div>
+                        <button id="closeMenu" class="text-gray-400 hover:text-white">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <nav class="space-y-4">
+                        <a href="{% url 'home' %}" class="block text-sm font-semibold text-gray-300 hover:text-cyan-400 transition-colors py-2">Home</a>
+                        <a href="#" class="block text-sm font-semibold text-gray-300 hover:text-cyan-400 transition-colors py-2">Solutions</a>
+                        <a href="#" class="block text-sm font-semibold text-gray-300 hover:text-cyan-400 transition-colors py-2">Malware Scan</a>
+                        <a href="#" class="block text-sm font-semibold text-gray-300 hover:text-cyan-400 transition-colors py-2">Breach Check</a>
+                        <a href="#" class="block text-sm font-semibold text-gray-300 hover:text-cyan-400 transition-colors py-2">Downloads</a>
+                        <div class="pt-4 space-y-4">
+                            <a href="#" class="block text-sm font-semibold text-gray-300 hover:bg-slate-800 rounded-lg transition-colors px-4 py-2">Sign in</a>
+                            <a href="#" class="block text-sm font-semibold text-center bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg hover:from-cyan-400 hover:to-blue-400 transition-all shadow-lg shadow-cyan-500/20 px-4 py-2">Get Protected</a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Overlay -->
+            <div id="overlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 hidden"></div>
+
+            <!-- Main Navigation -->
+            <nav class="flex items-center justify-between p-4 lg:px-8 backdrop-blur-lg bg-slate-900/70 border-b border-cyan-500/10" aria-label="Global">
+                <div class="flex lg:flex-1">
+                    <a href="#" class="-m-1.5 p-1.5 flex items-center gap-2">
+                        <div class="bg-gradient-to-r from-cyan-500 to-blue-500 p-2 rounded-lg shadow-lg shadow-cyan-500/20">
+                            <i class="fas fa-shield-alt text-white text-xl"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">Byte Bastion</span>
+                    </a>
+                </div>
+                <div class="flex lg:hidden">
+                    <button type="button" id="openMenu" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-300 hover:text-white transition-colors">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars h-6 w-6"></i>
+                    </button>
+                </div>
+                <!-- Rest of your existing navigation code remains the same -->
+                <div class="hidden lg:flex lg:gap-x-12">
+                    <a href="{% url 'home' %}" class="text-sm font-semibold leading-6 text-gray-300 hover:text-cyan-400 transition-colors">Home</a>
+                    <a href="#" class="text-sm font-semibold leading-6 text-gray-300 hover:text-cyan-400 transition-colors">Solutions</a>
+                    <a href="#" class="text-sm font-semibold leading-6 text-gray-300 hover:text-cyan-400 transition-colors">Malware Scan</a>
+                    <a href="#" class="text-sm font-semibold leading-6 text-gray-300 hover:text-cyan-400 transition-colors">Breach Check</a>
+                    <a href="#" class="text-sm font-semibold leading-6 text-gray-300 hover:text-cyan-400 transition-colors">Downloads</a>
+                </div>
+                <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-4">
+                    <a href="#" class="text-sm font-semibold leading-6 px-4 py-2 text-gray-300 hover:bg-slate-800 rounded-lg transition-colors">Sign in</a>
+                    <a href="#" class="text-sm font-semibold leading-6 px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg hover:from-cyan-400 hover:to-blue-400 transition-all shadow-lg shadow-cyan-500/20">Get Protected</a>
+                </div>
+            </nav>
+        </header>
+
+
+            {% block content %}
+            {% endblock %}
+
+
+       <!-- Footer -->
+       <footer class="bg-gray-900 text-gray-300" id="footer">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+            <!-- Company Info -->
+            <div>
+              <div class="flex items-center gap-2 mb-6">
+                <div class="bg-indigo-600 p-2 rounded-lg">
+                  <i class="fas fa-shield-alt text-white text-xl"></i>
+                </div>
+                <span class="text-xl font-bold text-white">Byte Bastion</span>
+              </div>
+              <p class="text-sm text-gray-400 mb-4">Protecting your digital assets with advanced cybersecurity solutions.</p>
+              <div class="flex gap-4">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                  <i class="fab fa-github"></i>
+                </a>
+              </div>
+            </div>
+      
+            <!-- Solutions -->
+            <div>
+              <h3 class="text-white font-semibold mb-4">Solutions</h3>
+              <ul class="space-y-3">
+                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Antivirus</a></li>
+                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Malware Detection</a></li>
+                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Breach Check</a></li>
+                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Enterprise Security</a></li>
+              </ul>
+            </div>
+      
+            <!-- Company -->
+            <div>
+              <h3 class="text-white font-semibold mb-4">Company</h3>
+              <ul class="space-y-3">
+                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Case Studies</a></li>
+                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
+                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+              </ul>
+            </div>
+      
+            <!-- Newsletter -->
+            <div>
+              <h3 class="text-white font-semibold mb-4">Stay Updated</h3>
+              <p class="text-sm text-gray-400 mb-4">Subscribe to our newsletter for the latest security updates and news.</p>
+              <form class="space-y-4">
+                <div>
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    class="w-full px-4 py-2 bg-gray-800 text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                  >
+                </div>
+                <button class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors">
+                  Subscribe
+                </button>
+              </form>
+            </div>
+          </div>
+      
+          <!-- Bottom Bar -->
+          <div class="pt-8 border-t border-gray-800">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+              <div class="text-sm text-gray-400">
+                © 2024 Byte Bastion. All rights reserved.
+              </div>
+              <div class="flex gap-6 text-sm">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">Cookie Policy</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+            </div>
+    
+    
+    
+          </div>
+          <script>
+            // Mobile menu functionality
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('overlay');
+            const openMenuBtn = document.getElementById('openMenu');
+            const closeMenuBtn = document.getElementById('closeMenu');
+    
+            function openMenu() {
+                mobileMenu.classList.add('active');
+                overlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+    
+            function closeMenu() {
+                mobileMenu.classList.remove('active');
+                overlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+    
+            openMenuBtn.addEventListener('click', openMenu);
+            closeMenuBtn.addEventListener('click', closeMenu);
+            overlay.addEventListener('click', closeMenu);
+        </script>
+    </body>
+    </html>
