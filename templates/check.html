@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Data Breach Scanner - SecureCheck{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-900 text-gray-300 py-12">
+    <br><br>
+
+    <!-- Security Tips Card -->
+    <div class="max-w-3xl mx-auto">
+        <div class="bg-gray-800 shadow-lg rounded-lg mb-8">
+            <div class="px-6 py-5 sm:p-8">
+                <div class="flex items-center">
+                    <i class="fas fa-shield-alt text-2xl text-indigo-500"></i>
+                    <div class="ml-5">
+                        <h3 class="text-xl font-semibold text-white">Why Check for Data Breaches?</h3>
+                        <p class="mt-2 text-sm text-gray-400">
+                            Regular scans help secure your accounts by identifying risks in compromised databases.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Form -->
+        <div class="bg-gray-800 shadow-lg rounded-lg">
+            <form method="post" class="px-6 py-5 sm:p-8">
+                {% csrf_token %}
+                <div class="space-y-6">
+                    <div>
+                        <label for="username_or_email" class="block text-sm font-medium text-gray-400">
+                            Email or Username
+                        </label>
+                        <div class="mt-2">
+                            {{ form|crispy }}
+                        </div>
+                        <p class="mt-2 text-sm text-gray-500">
+                            Enter the email or username you want to check for potential breaches.
+                        </p>
+                    </div>
+                    <button type="submit"
+                        class="w-full flex justify-center py-3 px-4 bg-indigo-600 rounded-md text-white font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        Scan for Breaches
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        {% if result %}
+        <!-- Results Section -->
+
+            <div class="px-6 py-5 sm:p-8">
+                {% if result == "secured" %}
+                <!-- No Breaches Found -->
+                <div class="bg-green-50 p-4 rounded-md">
+                    <div class="flex">
+                        <i class="fas fa-check-circle text-green-400"></i>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-green-800">Good news! No breaches found.</h3>
+                            <p class="mt-2 text-sm text-green-700">
+                                Your data appears to be secure. Keep up the good security practices!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <!-- Breaches Found -->
+                <div class="px-6 py-5 sm:p-8">
+                    <h3 class="text-lg font-semibold text-white">Scan Results for: {{ result.username_or_email }}</h3>
+                    <p class="mt-1 text-sm text-gray-400">Scan completed at {{ result.checked_at|date:"F j, Y, g:i a" }}</p>
+                </div>        
+                <div class="bg-red-50 p-4 rounded-md">
+                    <div class="flex">
+                        <i class="fas fa-exclamation-triangle text-red-400"></i>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-red-800">
+                                Alert: Found in {{ result.found_count }} data breach{% if result.found_count != 1 %}es{% endif %}
+                            </h3>
+                            <p class="mt-2 text-sm text-red-700">Compromised Information:</p>
+                            <ul class="list-disc list-inside mt-1 text-red-700">
+                                {% for field in result.fields %}
+                                <li>{{ field|title }}</li>
+                                {% endfor %}
+                            </ul>
+                            <div class="mt-4">
+                                <p class="text-sm font-medium text-red-800">Breach Sources:</p>
+                                <ul class="list-inside space-y-2">
+                                    {% for source in result.sources %}
+                                    <li class="text-red-700">
+                                        <i class="fas fa-database mr-2"></i>{{ source.name }}
+                                        <span class="text-gray-400 mx-2">•</span>{{ source.date }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Items -->
+                <div class="mt-6">
+                    <h4 class="text-lg font-medium text-white">Recommended Actions</h4>
+                    <ul class="mt-3 space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-key text-indigo-500 mr-2"></i>
+                            <p class="text-sm text-gray-300">
+                                Change your passwords immediately for any compromised accounts.
+                            </p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-lock text-indigo-500 mr-2"></i>
+                            <p class="text-sm text-gray-300">
+                                Enable two-factor authentication on all important accounts.
+                            </p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-eye text-indigo-500 mr-2"></i>
+                            <p class="text-sm text-gray-300">
+                                Monitor your accounts for suspicious activity.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <!-- Error Message -->
+        <div class="bg-red-50 p-4 rounded-md mt-8">
+            <div class="flex">
+                <i class="fas fa-times-circle text-red-400"></i>
+                <div class="ml-3">
+                    <h3 class="text-sm font-medium text-red-800">Error occurred during scan</h3>
+                    <p class="mt-2 text-sm text-red-700">{{ error }}</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Security Tips Section -->
+        <div class="grid gap-4 sm:grid-cols-2 mt-8">
+            <div class="bg-gray-800 shadow-lg rounded-lg">
+                <div class="px-6 py-5 sm:p-8">
+                    <h3 class="text-lg font-semibold text-white">Password Best Practices</h3>
+                    <ul class="mt-2 list-disc list-inside text-sm text-gray-400">
+                        <li>Use unique passwords for each account</li>
+                        <li>Make passwords at least 12 characters long</li>
+                        <li>Include numbers, symbols, and mixed case letters</li>
+                        <li>Consider using a password manager</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bg-gray-800 shadow-lg rounded-lg">
+                <div class="px-6 py-5 sm:p-8">
+                    <h3 class="text-lg font-semibold text-white">Additional Security Steps</h3>
+                    <ul class="mt-2 list-disc list-inside text-sm text-gray-400">
+                        <li>Enable two-factor authentication</li>
+                        <li>Monitor account activity regularly</li>
+                        <li>Keep software updated</li>
+                        <li>Be cautious of phishing attempts</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
