@@ -12,18 +12,18 @@ class Contact(models.Model):
 
 
 
-# Generate a key and save it securely in an environment variable
-key = Fernet.generate_key()
-cipher = Fernet(key)
+# # Generate a key and save it securely in an environment variable
+# key = Fernet.generate_key()
+# cipher = Fernet(key)
 
-class PasswordEntry(models.Model):
-    website = models.CharField(max_length=255)
-    username = models.CharField(max_length=255)
-    encrypted_password = models.BinaryField()
-    created_at = models.DateTimeField(auto_now_add=True)
+# class PasswordEntry(models.Model):
+#     website = models.CharField(max_length=255)
+#     username = models.CharField(max_length=255)
+#     encrypted_password = models.BinaryField()
+#     created_at = models.DateTimeField(auto_now_add=True)
 
-    def set_password(self, raw_password):
-        self.encrypted_password = cipher.encrypt(raw_password.encode())
+#     def set_password(self, raw_password):
+#         self.encrypted_password = cipher.encrypt(raw_password.encode())
 
-    def get_password(self):
-        return cipher.decrypt(self.encrypted_password).decode()
+#     def get_password(self):
+#         return cipher.decrypt(self.encrypted_password).decode()
