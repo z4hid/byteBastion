@@ -9,6 +9,6 @@ urlpatterns = [
     path('solutions/', SolutionsView.as_view(), name='solutions'),
     path('contact/', contact_view, name='contact'),
     path('success/', success_view, name='success'),
-    path('passwords/', views.password_list, name='password_list'),
-    path('add_passowrd/', views.add_password, name='add_password'),
+    # path('passwords/', views.password_list, name='password_list'),
+    # path('add_passowrd/', views.add_password, name='add_password'),
 ]
