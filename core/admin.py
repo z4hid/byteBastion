@@ -8,3 +8,6 @@ class ContactAdmin(admin.ModelAdmin):
     list_filter = ('created_at',)  # Add filter options by creation date
 
 admin.site.register(Contact, ContactAdmin)
+
+class PasswordAdmin(admin.ModelAdmin):
+    pass
