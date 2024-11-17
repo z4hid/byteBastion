@@ -37,8 +37,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "crispy_forms",
+    "crispy_tailwind",
     "core",
+    "account",
     "leak",
+    "detect",
 ]
 
 MIDDLEWARE = [
@@ -114,9 +118,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
 STATIC_URL = "static/"
 
 STATICFILES_DIRS = [
@@ -129,3 +130,23 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Crispy Forms settings
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"
+
+# Redirect after login/logout
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'
+
+# Use default session-based authentication
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = 'de032b646f1c7f'  # Your actual Mailtrap SMTP user
+EMAIL_HOST_PASSWORD = 'aee69b9bfc58e0'  # Your actual Mailtrap SMTP password
+EMAIL_PORT = 2525  # Make sure this port matches Mailtrap's settings
+EMAIL_USE_TLS = True  # Use TLS for secure email transmission
+DEFAULT_FROM_EMAIL = 'no-reply@brainsparkdigital.com'  # Customize this if needed
