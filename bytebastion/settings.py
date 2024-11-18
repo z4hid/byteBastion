@@ -143,10 +143,3 @@ LOGOUT_REDIRECT_URL = '/login/'
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
-EMAIL_HOST_USER = 'de032b646f1c7f'  # Your actual Mailtrap SMTP user
-EMAIL_HOST_PASSWORD = 'aee69b9bfc58e0'  # Your actual Mailtrap SMTP password
-EMAIL_PORT = 2525  # Make sure this port matches Mailtrap's settings
-EMAIL_USE_TLS = True  # Use TLS for secure email transmission
-DEFAULT_FROM_EMAIL = 'no-reply@brainsparkdigital.com'  # Customize this if needed
