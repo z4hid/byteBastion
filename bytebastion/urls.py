@@ -24,4 +24,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("core.urls")),
+    path("", include("leak.urls")),
+    path("", include("detect.urls")),
+    path("", include("account.urls")),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
