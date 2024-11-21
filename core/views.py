@@ -15,20 +15,20 @@ class SolutionsView(TemplateView):
     
 
 
-def password_list(request):
-    passwords = PasswordEntry.objects.filter(user=request.user)
-    return render(request, 'password_list.html', {'passwords': passwords})
+# def password_list(request):
+#     passwords = PasswordEntry.objects.filter(user=request.user)
+#     return render(request, 'password_list.html', {'passwords': passwords})
 
-def add_password(request):
-    if request.method == 'POST':
-        website = request.POST['website']
-        username = request.POST['username']
-        raw_password = request.POST['password']
-        password_entry = PasswordEntry(website=website, username=username)
-        password_entry.set_password(raw_password)
-        password_entry.save()
-        return redirect('password_list')
-    return render(request, 'add_password.html', {'generated_password': generate_password()})
+# def add_password(request):
+#     if request.method == 'POST':
+#         website = request.POST['website']
+#         username = request.POST['username']
+#         raw_password = request.POST['password']
+#         password_entry = PasswordEntry(website=website, username=username)
+#         password_entry.set_password(raw_password)
+#         password_entry.save()
+#         return redirect('password_list')
+#     return render(request, 'add_password.html', {'generated_password': generate_password()})
 
 
 
