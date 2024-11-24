@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 
-
+    <link rel="shortcut icon" type="image/png" href="{% static 'icon.ico' %}"/>
     <style>
         .mobile-menu {
             transform: translateX(-100%);
@@ -20,6 +20,7 @@
             transform: translateX(0);
         }
     </style>
+    
 </head>
 <body>
     <div class="bg-slate-900 min-h-screen">
@@ -40,13 +41,20 @@
                     </div>
                     <nav class="space-y-4">
                         <a href="{% url 'home' %}" class="block text-sm font-semibold text-gray-300 hover:text-cyan-400 transition-colors py-2">Home</a>
-                        <a href="#" class="block text-sm font-semibold text-gray-300 hover:text-cyan-400 transition-colors py-2">Solutions</a>
-                        <a href="#" class="block text-sm font-semibold text-gray-300 hover:text-cyan-400 transition-colors py-2">Malware Scan</a>
-                        <a href="#" class="block text-sm font-semibold text-gray-300 hover:text-cyan-400 transition-colors py-2">Breach Check</a>
+                        <a href="{% url 'solutions' %}" class="block text-sm font-semibold text-gray-300 hover:text-cyan-400 transition-colors py-2">Solutions</a>
+                        <a href="{% url 'upload_page' %}" class="block text-sm font-semibold text-gray-300 hover:text-cyan-400 transition-colors py-2">Malware Scan</a>
+                        <a href="{% url 'check_leak' %}" class="block text-sm font-semibold text-gray-300 hover:text-cyan-400 transition-colors py-2">Breach Check</a>
                         <a href="#" class="block text-sm font-semibold text-gray-300 hover:text-cyan-400 transition-colors py-2">Downloads</a>
                         <div class="pt-4 space-y-4">
-                            <a href="#" class="block text-sm font-semibold text-gray-300 hover:bg-slate-800 rounded-lg transition-colors px-4 py-2">Sign in</a>
-                            <a href="#" class="block text-sm font-semibold text-center bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg hover:from-cyan-400 hover:to-blue-400 transition-all shadow-lg shadow-cyan-500/20 px-4 py-2">Get Protected</a>
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'profile' %}" class="block text-sm font-semibold text-gray-300 hover:bg-slate-800 rounded-lg transition-colors px-4 py-2">
+                                    <i class="fas fa-user-circle"></i> {{ user.username }}
+                                </a>
+                                <a href="{% url 'logout' %}" class="block text-sm font-semibold text-gray-300 hover:bg-slate-800 rounded-lg transition-colors px-4 py-2">Logout</a>
+                            {% else %}
+                                <a href="{% url 'login' %}" class="block text-sm font-semibold text-gray-300 hover:bg-slate-800 rounded-lg transition-colors px-4 py-2">Sign in</a>
+                            {% endif %}
+                            <a href="{% url 'contact' %}" class="block text-sm font-semibold text-center bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg hover:from-cyan-400 hover:to-blue-400 transition-all shadow-lg shadow-cyan-500/20 px-4 py-2">Get Protected</a>
                         </div>
                     </nav>
                 </div>
@@ -74,14 +82,21 @@
                 <!-- Rest of your existing navigation code remains the same -->
                 <div class="hidden lg:flex lg:gap-x-12">
                     <a href="{% url 'home' %}" class="text-sm font-semibold leading-6 text-gray-300 hover:text-cyan-400 transition-colors">Home</a>
-                    <a href="#" class="text-sm font-semibold leading-6 text-gray-300 hover:text-cyan-400 transition-colors">Solutions</a>
-                    <a href="#" class="text-sm font-semibold leading-6 text-gray-300 hover:text-cyan-400 transition-colors">Malware Scan</a>
-                    <a href="#" class="text-sm font-semibold leading-6 text-gray-300 hover:text-cyan-400 transition-colors">Breach Check</a>
+                    <a href="{% url 'solutions' %}" class="text-sm font-semibold leading-6 text-gray-300 hover:text-cyan-400 transition-colors">Solutions</a>
+                    <a href="{% url 'upload_page' %}" class="text-sm font-semibold leading-6 text-gray-300 hover:text-cyan-400 transition-colors">Malware Scan</a>
+                    <a href="{% url 'check_leak' %}" class="text-sm font-semibold leading-6 text-gray-300 hover:text-cyan-400 transition-colors">Breach Check</a>
                     <a href="#" class="text-sm font-semibold leading-6 text-gray-300 hover:text-cyan-400 transition-colors">Downloads</a>
                 </div>
                 <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-4">
-                    <a href="#" class="text-sm font-semibold leading-6 px-4 py-2 text-gray-300 hover:bg-slate-800 rounded-lg transition-colors">Sign in</a>
-                    <a href="#" class="text-sm font-semibold leading-6 px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg hover:from-cyan-400 hover:to-blue-400 transition-all shadow-lg shadow-cyan-500/20">Get Protected</a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'profile' %}" class="text-sm font-semibold leading-6 px-4 py-2 text-gray-300 hover:bg-slate-800 rounded-lg transition-colors">
+                            <i class="fas fa-user-circle"></i> {{ user.username }}
+                        </a>
+                        <a href="{% url 'logout' %}" class="text-sm font-semibold leading-6 px-4 py-2 text-gray-300 hover:bg-slate-800 rounded-lg transition-colors">Logout</a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="text-sm font-semibold leading-6 px-4 py-2 text-gray-300 hover:bg-slate-800 rounded-lg transition-colors">Sign in</a>
+                    {% endif %}
+                    <a href="{% url 'contact' %}" class="text-sm font-semibold leading-6 px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg hover:from-cyan-400 hover:to-blue-400 transition-all shadow-lg shadow-cyan-500/20">Get Protected</a>
                 </div>
             </nav>
         </header>
@@ -122,8 +137,8 @@
               <h3 class="text-white font-semibold mb-4">Solutions</h3>
               <ul class="space-y-3">
                 <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Antivirus</a></li>
-                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Malware Detection</a></li>
-                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Breach Check</a></li>
+                <li><a href="{% url 'upload_page' %}" class="text-gray-400 hover:text-white transition-colors">Malware Detection</a></li>
+                <li><a href="{% url 'check_leak' %}" class="text-gray-400 hover:text-white transition-colors">Breach Check</a></li>
                 <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Enterprise Security</a></li>
               </ul>
             </div>
@@ -135,7 +150,7 @@
                 <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
                 <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Case Studies</a></li>
                 <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
-                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                <li><a href="{% url 'contact' %}" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
               </ul>
             </div>
       
