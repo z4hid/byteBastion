@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Contact Us - SecureCheck{% endblock %}
+
+{% block content %}
+<br>
+<br>
+<br>
+
+<div class="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 py-16">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+            <!-- Contact Card -->
+            <div class="bg-slate-800/50 backdrop-blur-xl rounded-2xl shadow-2xl border border-cyan-500/10">
+                <div class="grid md:grid-cols-2">
+                    <!-- Info Section -->
+                    <div class="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 p-8 rounded-l-2xl border-r border-slate-700/50">
+                        <h2 class="text-2xl font-bold mb-6 text-white">Let's Connect</h2>
+                        <p class="text-slate-300 mb-8">Have questions about our cybersecurity solutions? We're here to help protect your digital assets.</p>
+                        
+                        <!-- Contact Information -->
+                        <div class="space-y-6">
+                            <div class="flex items-center space-x-4 group">
+                                <div class="bg-gradient-to-br from-cyan-500 to-blue-500 p-3 rounded-lg shadow-lg group-hover:shadow-cyan-500/20 transition-all">
+                                    <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-white">Our Location</h3>
+                                    <p class="text-slate-300">123 Security Street, Cyber City</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4 group">
+                                <div class="bg-gradient-to-br from-cyan-500 to-blue-500 p-3 rounded-lg shadow-lg group-hover:shadow-cyan-500/20 transition-all">
+                                    <i class="fas fa-phone text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-white">Phone</h3>
+                                    <p class="text-slate-300">+1 (555) 123-4567</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4 group">
+                                <div class="bg-gradient-to-br from-cyan-500 to-blue-500 p-3 rounded-lg shadow-lg group-hover:shadow-cyan-500/20 transition-all">
+                                    <i class="fas fa-envelope text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-white">Email</h3>
+                                    <p class="text-slate-300">support@securecheck.com</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social Links -->
+                        <div class="mt-12">
+                            <h3 class="font-semibold text-white mb-4">Connect With Us</h3>
+                            <div class="flex space-x-4">
+                                <a href="#" class="bg-slate-700/50 p-3 rounded-lg hover:bg-gradient-to-br hover:from-cyan-500 hover:to-blue-500 transition-all duration-300">
+                                    <i class="fab fa-twitter text-white"></i>
+                                </a>
+                                <a href="#" class="bg-slate-700/50 p-3 rounded-lg hover:bg-gradient-to-br hover:from-cyan-500 hover:to-blue-500 transition-all duration-300">
+                                    <i class="fab fa-linkedin text-white"></i>
+                                </a>
+                                <a href="#" class="bg-slate-700/50 p-3 rounded-lg hover:bg-gradient-to-br hover:from-cyan-500 hover:to-blue-500 transition-all duration-300">
+                                    <i class="fab fa-github text-white"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Section -->
+                    <div class="p-8">
+                        <h2 class="text-2xl font-bold text-white mb-6">Send us a Message</h2>
+                        
+                        <form method="POST" class="space-y-6">
+                            {% csrf_token %}
+                            <div class="space-y-4">
+                                {{ form|crispy }}
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white py-3 px-6 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20 flex items-center justify-center space-x-2 group">
+                                <span>Send Message</span>
+                                <i class="fas fa-paper-plane group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                        </form>
+
+                        <!-- Response Time Notice -->
+                        <div class="mt-6 flex items-center justify-center space-x-2 text-slate-400 bg-slate-700/30 p-3 rounded-lg">
+                            <i class="fas fa-clock"></i>
+                            <p class="text-sm">Average response time: <span class="font-semibold text-cyan-400">24 hours</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="mt-12 grid md:grid-cols-3 gap-6">
+                <div class="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-cyan-500/10 hover:border-cyan-500/30 transition-all group">
+                    <div class="text-cyan-500 mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-headset text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">24/7 Support</h3>
+                    <p class="text-slate-300">Our team is available around the clock to assist you with any urgent matters.</p>
+                </div>
+
+                <div class="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-cyan-500/10 hover:border-cyan-500/30 transition-all group">
+                    <div class="text-cyan-500 mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-comments text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Live Chat</h3>
+                    <p class="text-slate-300">Connect instantly with our support team through our live chat service.</p>
+                </div>
+
+                <div class="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-cyan-500/10 hover:border-cyan-500/30 transition-all group">
+                    <div class="text-cyan-500 mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-shield-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Security First</h3>
+                    <p class="text-slate-300">Your communications are encrypted and secured with enterprise-grade protection.</p>
+                </div>
+            </div>
+
+            <!-- Additional Features -->
+            <div class="mt-12 bg-slate-800/30 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/10">
+                <div class="flex flex-col md:flex-row items-center justify-between">
+                    <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                        <div class="bg-green-500/20 p-2 rounded-lg">
+                            <i class="fas fa-check text-green-500"></i>
+                        </div>
+                        <p class="text-slate-300">All inquiries are encrypted end-to-end</p>
+                    </div>
+                    <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                        <div class="bg-blue-500/20 p-2 rounded-lg">
+                            <i class="fas fa-lock text-blue-500"></i>
+                        </div>
+                        <p class="text-slate-300">ISO 27001 Certified Security</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-purple-500/20 p-2 rounded-lg">
+                            <i class="fas fa-heart text-purple-500"></i>
+                        </div>
+                        <p class="text-slate-300">99.9% Customer Satisfaction</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Custom styles for crispy forms in dark mode */
+    label {
+        color: #e2e8f0 !important;
+    }
+    .form-control {
+        background-color: rgba(15, 23, 42, 0.3) !important;
+        border-color: rgba(14, 165, 233, 0.2) !important;
+        color: #e2e8f0 !important;
+    }
+    .form-control:focus {
+        border-color: rgba(14, 165, 233, 0.5) !important;
+        box-shadow: 0 0 0 0.2rem rgba(14, 165, 233, 0.15) !important;
+    }
+    .form-text {
+        color: #94a3b8 !important;
+    }
+</style>
+{% endblock %}
